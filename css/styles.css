@@ -1,0 +1,191 @@
+
+/* =================================
+   1. CONFIGURACIÓN GENERAL
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-primary: #493078;
+    --color-secondary: #7655A6;
+    --color-background: #F4F1F9;
+    --color-white: #FFFFFF;
+    --color-text: #302B3D;
+    --color-text-light: #777184;
+    --color-border: #DDD6E8;
+}
+
+/* =================================
+   2. CUERPO DE LA PÁGINA
+================================= */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =================================
+   3. ENCABEZADO
+================================= */
+
+.header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 15px;
+    color: #E6DDF2;
+}
+
+/* =================================
+   4. CONTENIDO PRINCIPAL
+================================= */
+
+.main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* =================================
+   5. SECCIÓN DE LOGIN
+================================= */
+
+.login-section {
+    background-color: var(--color-white);
+    width: 100%;
+    max-width: 420px;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(73, 48, 120, 0.10);
+}
+
+.login-section h2 {
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+/* =================================
+   6. FORMULARIO
+================================= */
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#login-form label {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+#login-form input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid var(--color-border);
+    border-radius: 7px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#login-form input:focus {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 3px rgba(118, 85, 166, 0.15);
+}
+
+#login-form input::placeholder {
+    color: #AAA3B5;
+}
+
+/* Ocultar saltos de línea usados provisionalmente en HTML */
+#login-form br {
+    display: none;
+}
+
+/* =================================
+   7. BOTÓN DE INICIO DE SESIÓN
+================================= */
+
+#login-form button {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    padding: 13px;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#login-form button:hover {
+    background-color: var(--color-secondary);
+}
+
+#login-form button:active {
+    transform: scale(0.98);
+}
+
+/* =================================
+   8. PIE DE PÁGINA
+================================= */
+
+.footer {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+    padding: 18px 15px;
+}
+
+.footer p {
+    font-size: 13px;
+    color: #E6DDF2;
+}
+
+/* =================================
+   9. DISEÑO RESPONSIVE
+================================= */
+
+@media (max-width: 480px) {
+
+    .header {
+        padding: 25px 15px;
+    }
+
+    .header h1 {
+        font-size: 26px;
+    }
+
+    .main {
+        padding: 25px 15px;
+    }
+
+    .login-section {
+        padding: 25px 20px;
+    }
+
+}
