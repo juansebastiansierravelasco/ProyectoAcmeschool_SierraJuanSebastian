@@ -1,6 +1,6 @@
 
 import { guardarUsuarios, obtenerUsuarios } from "./storage.js";
-
+import { validarCredenciales } from "./auth.js";
 // Usuarios iniciales
 const usuario = {
     identificacion: "10053265869",
@@ -40,8 +40,26 @@ if (!usuariosGuardados) {
 
 console.log(usuarios);
 
+const formularioLogin = document.getElementById("login-form");
 
 
+formularioLogin.addEventListener("submit", (evento) => {
 
+   evento.preventDefault();
+   const email=document.getElementById("correo").value;
+   const contrasena=document.getElementById("contrasena").value;
+   const usuarioEncontrado = validarCredenciales(email, contrasena, usuarios);
+   if (usuarioEncontrado) {
+
+        alert("Bienvenido a Acme School");
+        window.location.href = "./pages/dashboard.html";
+
+    } else {
+
+        alert("Correo o contraseña incorrectos");
+
+    }
+
+});
 
 
