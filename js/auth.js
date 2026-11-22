@@ -6,3 +6,12 @@ export function validarCredenciales(email, contrasena, usuarios) {
 
     return usuarioEncontrado;
 }
+
+ export function  protegerPagina() {
+
+     const protege = localStorage.getItem("usuarioActivo");
+    
+     if (protege===null) {
+    window.location.href = "../index.html";
+     }
+}
