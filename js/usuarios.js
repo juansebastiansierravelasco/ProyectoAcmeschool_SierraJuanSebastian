@@ -1,43 +1,72 @@
 import { protegerPagina } from "./auth.js";
-import { obtenerUsuarios } from "./storage.js";
+import { obtenerUsuarios, guardarUsuarios} from "./storage.js";
 
 // 1. Proteger la página
 protegerPagina();
 
 // 2. Obtener los usuarios
-const usuarios = obtenerUsuarios();
+let usuarios = obtenerUsuarios();
 
 // 3. Obtener el cuerpo de la tabla
 const listaUsuarios = document.getElementById("lista-usuarios");
 
 // 4. Recorrer los usuarios y construir la tabla
-usuarios.forEach((usuario) => {
+function mostrarUsuarios() {
 
-    const fila = document.createElement("tr");
+    usuarios.forEach((usuario) => {
 
-    const celdaIdentificacion = document.createElement("td");
-    celdaIdentificacion.textContent = usuario.identificacion;
-    fila.appendChild(celdaIdentificacion);
+        const fila = document.createElement("tr");
 
-    const celdaNombre = document.createElement("td");
-    celdaNombre.textContent = usuario.nombreCompleto;
-    fila.appendChild(celdaNombre);
+        const celdaIdentificacion = document.createElement("td");
+        celdaIdentificacion.textContent = usuario.identificacion;
+        fila.appendChild(celdaIdentificacion);
+        const celdaNombre = document.createElement("td");
+        celdaNombre.textContent = usuario.nombreCompleto;
+        fila.appendChild(celdaNombre);
+        const celdaEmail = document.createElement("td");
+        celdaEmail.textContent = usuario.email;
+        fila.appendChild(celdaEmail);
+        const celdaTelefono = document.createElement("td");
+        celdaTelefono.textContent = usuario.telefono;
+        fila.appendChild(celdaTelefono);
+        const celdaCargo = document.createElement("td");
+        celdaCargo.textContent = usuario.cargo;
+        fila.appendChild(celdaCargo);
+        const celdaAcciones = document.createElement("td");
 
-    const celdaEmail = document.createElement("td");
-    celdaEmail.textContent = usuario.email;
-    fila.appendChild(celdaEmail);
+        // Botón eliminar
+        const botonEliminar = document.createElement("button");
+        botonEliminar.textContent = "Eliminar";
 
-    const celdaTelefono = document.createElement("td");
-    celdaTelefono.textContent = usuario.telefono;
-    fila.appendChild(celdaTelefono);
+        botonEliminar.addEventListener("click", () => {
+            const confirmar = confirm("¿Estás seguro de eliminar este usuario?");
+            if (!confirmar) {
+             return;
+            }
+            const usuariosActualizados = usuarios.filter((elemento) => {
+                return elemento.identificacion !== usuario.identificacion;
+            });
 
-    const celdaCargo = document.createElement("td");
-    celdaCargo.textContent = usuario.cargo;
-    fila.appendChild(celdaCargo);
+            guardarUsuarios(usuariosActualizados);
 
-    listaUsuarios.appendChild(fila);
+            usuarios = usuariosActualizados;
 
-});
+            listaUsuarios.replaceChildren();
+
+            mostrarUsuarios();
+
+        });
+
+        celdaAcciones.appendChild(botonEliminar);
+        fila.appendChild(celdaAcciones);
+
+        listaUsuarios.appendChild(fila);
+
+    });
+
+}
+
+mostrarUsuarios();
 
 // 5. Obtener el botón y el formulario
 const botonRegistrar = document.getElementById("registrar-usuario");
@@ -59,11 +88,40 @@ const formularioUsuario = document.getElementById("formulario-usuario");
 formularioUsuario.addEventListener("submit", (evento) => {
 
     evento.preventDefault();
-    const identificacion=document.getElementById("identificacion").value;
+
+    const identificacion = document.getElementById("identificacion").value;
     const nombreCompleto = document.getElementById("nombreCompleto").value;
     const email = document.getElementById("email").value;
     const telefono = document.getElementById("telefono").value;
     const cargo = document.getElementById("cargo").value;
     const contrasena = document.getElementById("contrasena").value;
+
+    const nuevoUsuario = {
+        identificacion: identificacion,
+        nombreCompleto: nombreCompleto,
+        email: email,
+        telefono: telefono,
+        cargo: cargo,
+        contrasena: contrasena
+    };
+
+    // Validar si ya existe la identificación o el correo
+    const usuarioExiste = usuarios.some((usuario) => {
+        return usuario.identificacion === identificacion || usuario.email === email;
+    });
+
+    if (usuarioExiste) {
+        alert("Ya existe un usuario con esa identificación o correo electrónico.");
+        return;
+    }
+    usuarios.push(nuevoUsuario);
+    guardarUsuarios(usuarios);
+    listaUsuarios.replaceChildren();
+    mostrarUsuarios();
+
+    alert("Usuario registrado correctamente.");
+
+    formularioUsuario.reset();
+    formularioRegistro.style.display = "none";
 
 });
