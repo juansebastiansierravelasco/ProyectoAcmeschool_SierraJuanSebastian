@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
+    <link rel="stylesheet" href="../css/usuario.css">
     <script type="module" src="../js/usuarios.js"></script>
 </head>
 <body>
@@ -55,15 +56,39 @@
 
     <form id="formulario-usuario">
 
+        <label for="identificacion">Identificación</label>
+        <input type="text" id="identificacion" name="identificacion" required>
+        <label for="nombreCompleto">Nombre completo</label>
+        <input type="text" id="nombreCompleto" name="nombreCompleto" required>
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" name="email" required>
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" name="telefono" required>
+        <label for="cargo">Cargo</label>
+
+        <select id="cargo" name="cargo" required>
+        <option value="">Selecciona un cargo</option>
+        <option value="Administrativo">Administrativo</option>
+        <option value="Docente">Docente</option>
+        <option value="Estudiante">Estudiante</option>
+        </select>
+
+        <label for="contrasena">Contraseña</label>
+        <input type="password" id="contrasena" name="contrasena" required>
+       
+        <button type="submit" id="guardar-usuario">
+        Guardar usuario
+        </button>
+        
+        <button type="button" id="cancelar-registro">
+         Cancelar
+        </button>
+
     </form>
 
      </section>
 </main>
 
-
-<footer class="footer">
-        <p>&copy; 2026 Acme School. Todos los derechos reservados.</p>
-    </footer>
 
 </body>
 </html>
