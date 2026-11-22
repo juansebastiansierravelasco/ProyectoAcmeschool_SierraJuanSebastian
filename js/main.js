@@ -38,7 +38,7 @@ if (!usuariosGuardados) {
     guardarUsuarios(usuarios);
 }
 
-console.log(usuarios);
+
 
 const formularioLogin = document.getElementById("login-form");
 
