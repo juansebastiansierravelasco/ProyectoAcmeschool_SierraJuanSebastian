@@ -1,0 +1,142 @@
+/*====================================
+Usuario para gestionar,cerrar sesion, gestionar examenes estilo
+======================================*/
+/* Configuración general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #F4F1F9;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Encabezado */
+.header {
+    background-color: #493078;
+    color: white;
+    text-align: center;
+    padding: 25px 20px;
+}
+
+.header h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.header p {
+    font-size: 16px;
+}
+
+/* Contenido principal */
+.main {
+    max-width: 1100px;
+    width: 90%;
+    margin: 50px auto;
+}
+
+/* Título y subtítulo */
+.titulo {
+    text-align: center;
+    color: #493078;
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.subtitulo {
+    text-align: center;
+    color: #666;
+    font-size: 17px;
+    margin-bottom: 40px;
+}
+
+/* Distribución de las tarjetas */
+.dashboard-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Tarjetas */
+.dashboard-card {
+    background-color: white;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.10);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 220px;
+}
+
+.icono {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.dashboard-card h3 {
+    color: #493078;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.dashboard-card p {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+/* Enlaces y botones */
+.dashboard-card a,
+.dashboard-card button {
+    display: inline-block;
+    background-color: #493078;
+    color: white;
+    padding: 11px 25px;
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dashboard-card a:hover,
+.dashboard-card button:hover {
+    background-color: #7655A6;
+}
+
+/* Adaptación para tablets */
+@media (max-width: 850px) {
+    .dashboard-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Adaptación para celulares */
+@media (max-width: 600px) {
+    .main {
+        margin: 30px auto;
+    }
+
+    .titulo {
+        font-size: 24px;
+    }
+
+    .subtitulo {
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    .dashboard-options {
+        grid-template-columns: 1fr;
+    }
+}

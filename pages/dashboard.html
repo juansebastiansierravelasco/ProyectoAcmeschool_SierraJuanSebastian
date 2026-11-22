@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel principal - Acme School</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <script type="module" src="../js/dashboard.js"></script>
 </head>
 <body>
 
@@ -14,8 +15,33 @@
     </header>
 
     <main class="main">
-        <h2>Bienvenido a Acme School</h2>
-        <p>Selecciona el módulo que deseas administrar.</p>
+        <h2 class="titulo">Bienvenido a Acme School</h2>
+        <p class="subtitulo">Selecciona el módulo que deseas administrar.</p>
+
+    <section class="dashboard-options">
+
+    <article class="dashboard-card">
+        <span class="icono">👥</span>
+        <h3>Gestión de usuarios</h3>
+        <p>Administra los usuarios de la plataforma.</p>
+        <a href="usuarios.html">Ingresar</a>
+    </article>
+
+    <article class="dashboard-card">
+        <span class="icono">📋</span>
+        <h3>Gestión de exámenes</h3>
+        <p>Crea y administra los exámenes.</p>
+        <a href="examenes.html">Ingresar</a>
+    </article>
+
+    <article class="dashboard-card">
+        <span class="icono">🚪</span>
+        <h3>Cerrar sesión</h3>
+        <p>Finaliza tu sesión en Acme School.</p>
+        <button id="cerrar-sesion">Cerrar sesión</button>
+    </article>
+
+</section>
 
        
     </main>

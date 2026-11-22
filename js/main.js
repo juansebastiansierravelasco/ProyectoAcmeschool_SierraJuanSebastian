@@ -50,8 +50,8 @@ formularioLogin.addEventListener("submit", (evento) => {
    const contrasena=document.getElementById("contrasena").value;
    const usuarioEncontrado = validarCredenciales(email, contrasena, usuarios);
    if (usuarioEncontrado) {
-
-        alert("Bienvenido a Acme School");
+    
+        localStorage.setItem("usuarioActivo", JSON.stringify(usuarioEncontrado));
         window.location.href = "./pages/dashboard.html";
 
     } else {
