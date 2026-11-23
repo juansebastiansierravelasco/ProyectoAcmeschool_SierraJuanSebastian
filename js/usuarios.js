@@ -6,6 +6,7 @@ protegerPagina();
 
 // 2. Obtener los usuarios
 let usuarios = obtenerUsuarios();
+let identificacionOriginal = null;
 
 // 3. Obtener el cuerpo de la tabla
 const listaUsuarios = document.getElementById("lista-usuarios");
@@ -33,6 +34,26 @@ function mostrarUsuarios() {
         celdaCargo.textContent = usuario.cargo;
         fila.appendChild(celdaCargo);
         const celdaAcciones = document.createElement("td");
+
+
+        const botonEditar=document.createElement("button");
+        botonEditar.textContent="Editar";
+        botonEditar.addEventListener("click", () => {
+
+        formularioRegistro.style.display = "block";
+
+        document.getElementById("identificacion").value = usuario.identificacion;
+        document.getElementById("nombreCompleto").value = usuario.nombreCompleto;
+        document.getElementById("email").value = usuario.email;
+        document.getElementById("telefono").value = usuario.telefono;
+        document.getElementById("cargo").value = usuario.cargo;
+        document.getElementById("contrasena").value = usuario.contrasena;
+
+        identificacionOriginal = usuario.identificacion;
+
+        });
+
+        celdaAcciones.appendChild(botonEditar);
 
         // Botón eliminar
         const botonEliminar = document.createElement("button");
@@ -74,8 +95,11 @@ const formularioRegistro = document.getElementById("formulario-registro");
 const botonCancelar=document.getElementById("cancelar-registro")
 
 botonCancelar.addEventListener("click",()=>{
+    formularioUsuario.reset();
+    identificacionOriginal = null;
     formularioRegistro.style.display="none";
 })
+
 // 6. Detectar el clic en Registrar usuario
 botonRegistrar.addEventListener("click", () => {
 
@@ -107,14 +131,26 @@ formularioUsuario.addEventListener("submit", (evento) => {
 
     // Validar si ya existe la identificación o el correo
     const usuarioExiste = usuarios.some((usuario) => {
-        return usuario.identificacion === identificacion || usuario.email === email;
+        return (usuario.identificacion === identificacion || usuario.email === email)
+        && usuario.identificacion !== identificacionOriginal;
     });
 
     if (usuarioExiste) {
         alert("Ya existe un usuario con esa identificación o correo electrónico.");
         return;
     }
+    if (identificacionOriginal !== null) {
+
+    const indice = usuarios.findIndex((elemento) => {
+    return elemento.identificacion === identificacionOriginal;
+    });
+    usuarios[indice] = nuevoUsuario;
+    } else {
+
     usuarios.push(nuevoUsuario);
+
+    }
+    identificacionOriginal = null;
     guardarUsuarios(usuarios);
     listaUsuarios.replaceChildren();
     mostrarUsuarios();
