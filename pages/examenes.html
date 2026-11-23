@@ -1,12 +1,93 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examenes</title>
+    <title>Gestión de exámenes - Acme School</title>
+    <link rel="stylesheet" href="../css/examenes.css">
     <script type="module" src="../js/examenes.js"></script>
 </head>
 <body>
-    
+
+    <header class="header">
+        <h1>Acme School</h1>
+        <p>Gestión de exámenes</p>
+    </header>
+
+    <main class="main">
+
+        <a href="dashboard.html" class="volver">Volver al panel principal</a>
+
+        <section class="contenido">
+
+            <h2>Administración de exámenes</h2>
+            <p>Consulta, registra y administra los exámenes de la plataforma.</p>
+
+            <button type="button" id="registrar-examen">
+                Registrar examen
+            </button>
+
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Título</th>
+                            <th>Tiempo (minutos)</th>
+                            <th>Porcentaje de aprobación</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="lista-examenes">
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <section id="formulario-registro" class="formulario-section">
+
+            <h2>Registrar examen</h2>
+
+            <form id="formulario-examen">
+
+                <label for="codigo">Código del examen</label>
+                <input type="text" id="codigo" required>
+
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" required>
+
+                <label for="tiempo">Tiempo en minutos</label>
+                <input type="number" id="tiempo" min="1" required>
+
+                <label for="porcentaje">Porcentaje de aprobación</label>
+                <input type="number" id="porcentaje" min="1" max="100" required>
+
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" rows="4" required></textarea>
+
+                <div class="botones-formulario">
+                    <button type="submit" id="guardar-examen">
+                        Guardar examen
+                    </button>
+
+                    <button type="button" id="cancelar-examen">
+                        Cancelar
+                    </button>
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>Acme School - Plataforma de gestión de exámenes</p>
+    </footer>
+
 </body>
 </html>

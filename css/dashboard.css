@@ -2,6 +2,16 @@
 Usuario para gestionar,cerrar sesion, gestionar examenes estilo
 ======================================*/
 /* Configuración general */
+:root {
+    --color-primary: #493078;
+    --color-secondary: #7655A6;
+    --color-background: #F4F1F9;
+    --color-white: #FFFFFF;
+    --color-text: #302B3D;
+    --color-text-light: #777184;
+    --color-border: #DDD6E8;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -112,6 +122,18 @@ body {
 .dashboard-card a:hover,
 .dashboard-card button:hover {
     background-color: #7655A6;
+}
+
+.footer {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+    padding: 45px 15px;
+}
+
+.footer p {
+    font-size: 14px;
+    color: #E6DDF2;
 }
 
 /* Adaptación para tablets */

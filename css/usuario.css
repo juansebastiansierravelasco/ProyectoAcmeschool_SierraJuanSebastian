@@ -1,5 +1,15 @@
 
 /* CONFIGURACIÓN GENERAL */
+:root {
+    --color-primary: #493078;
+    --color-secondary: #7655A6;
+    --color-background: #F4F1F9;
+    --color-white: #FFFFFF;
+    --color-text: #302B3D;
+    --color-text-light: #777184;
+    --color-border: #DDD6E8;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -145,7 +155,17 @@ button:focus-visible {
 #formulario-usuario button {
     margin-top: 10px;
 }
+.footer {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+    padding: 50px 10px;
+}
 
+.footer p {
+    font-size: 13px;
+    color: #E6DDF2;
+}
 /* DISEÑO RESPONSIVE */
 @media (max-width: 600px) {
     .main {
