@@ -83,73 +83,65 @@
 
         </section>
 
-        <section class="preguntas-section">
-        <h2>Gestión de preguntas</h2>
-        <p>Administra las preguntas y respuestas de cada examen.</p>
-        <label for="examen-seleccionado">Seleccionar examen:</label>
+        
+<section class="preguntas-section">
 
-         <select id="examen-seleccionado">
-         <option value="">Selecciona un examen</option>
-         </select>
+    <h2>Gestión de preguntas</h2>
 
-         <button type="button" id="agregar-pregunta">
-         Agregar pregunta
-         </button>
+    <p>Administra las preguntas y respuestas de cada examen.</p>
 
-         <div id="formulario-pregunta">
-             <label for="enunciado-pregunta">
-             Enunciado de la pregunta:
-             </label>
+    <label for="examen-seleccionado">
+        Seleccionar examen:
+    </label>
 
-             <textarea
-             id="enunciado-pregunta"
-             required
-             placeholder="Escribe aquí la pregunta">
-             </textarea>
+    <select id="examen-seleccionado">
+        <option value="">Selecciona un examen</option>
+    </select>
 
-             <button type="submit">
-              Guardar pregunta
-             </button>
+    <button type="button" id="agregar-pregunta">
+        Agregar pregunta
+    </button>
 
-             <button type="button" id="cancelar-pregunta">
-               Cancelar
-             </button>
+    <div id="formulario-pregunta">
 
-            <form id="formulario-pregunta-form">
+        <form id="formulario-pregunta-form">
 
-             <label for="enunciado-pregunta">
-             Enunciado de la pregunta:
+            <label for="enunciado-pregunta">
+                Enunciado de la pregunta:
             </label>
 
             <textarea
-             id="enunciado-pregunta"
-             required
-             placeholder="Escribe aquí la pregunta">
-             </textarea>
+                id="enunciado-pregunta"
+                required
+                placeholder="Escribe aquí la pregunta">
+            </textarea>
 
-             <div id="opciones-respuesta">
+            <div id="opciones-respuesta">
 
-             <h3>Opciones de respuesta</h3>
+                <h3>Opciones de respuesta</h3>
 
-             <button type="button" id="agregar-respuesta">
-             Agregar respuesta
-             </button>
+                <button type="button" id="agregar-respuesta">
+                    Agregar respuesta
+                </button>
 
-             </div>
+                <div id="lista-respuestas"></div>
 
-             <button type="submit">
-             Guardar pregunta
+            </div>
+
+            <button type="submit">
+                Guardar pregunta
             </button>
 
-             <button type="button" id="cancelar-pregunta">
-             Cancelar
+            <button type="button" id="cancelar-pregunta">
+                Cancelar
             </button>
 
-            </form>
+        </form>
 
-         </div>
+    </div>
 
-        </section>
+</section>
+
 
     </main>
 
