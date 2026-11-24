@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resolver examen - Acme School</title>
+
+    <link rel="stylesheet" href="../css/resolver.css">
+    <script type="module" src="../js/resolver.js"></script>
+</head>
+
+<body>
+
+    <header class="header" id="encabezado">
+        <h1>Acme School</h1>
+        <p>Resolución de exámenes</p>
+    </header>
+
+    <main class="main" id="contenido-principal">
+
+        <a href="../index.html" class="volver" id="volver-inicio">
+            Volver al inicio
+        </a>
+
+        <section class="contenido" id="seccion-seleccion">
+
+            <h2>Exámenes disponibles</h2>
+
+            <p>Selecciona el examen que deseas presentar.</p>
+
+            <div class="formulario-estudiante" id="formulario-estudiante">
+
+                <label for="identificacion-estudiante">
+                    Número de identificación:
+                </label>
+
+                <input
+                    type="text"
+                    id="identificacion-estudiante"
+                    class="campo-estudiante"
+                    required
+                    placeholder="Ingresa tu identificación"
+                >
+
+                <label for="nombre-estudiante">
+                    Nombre completo:
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre-estudiante"
+                    class="campo-estudiante"
+                    required
+                    placeholder="Ingresa tu nombre completo"
+                >
+
+                <label for="examen-disponible">
+                    Seleccionar examen:
+                </label>
+
+                <select id="examen-disponible" class="campo-estudiante">
+                    <option value="">Selecciona un examen</option>
+                </select>
+
+                <button type="button" id="comenzar-examen" class="boton-principal">
+                    Comenzar examen
+                </button>
+
+            </div>
+
+        </section>
+
+        
+        <section class="contenido" id="seccion-resolver">
+
+            <div class="informacion-examen" id="informacion-examen">
+
+                <h2 id="titulo-examen"></h2>
+
+                <p id="descripcion-examen"></p>
+
+                <p class="temporizador">
+                    Tiempo restante:
+                    <span id="tiempo-restante">00:00</span>
+                </p>
+
+            </div>
+
+            <form id="formulario-respuestas">
+
+                <div id="lista-preguntas-resolver" class="lista-preguntas">
+                </div>
+
+                <button type="submit" id="finalizar-examen" class="boton-principal">
+                    Finalizar examen
+                </button>
+
+            </form>
+
+        </section>
+
+        
+        <section class="contenido" id="seccion-resultado">
+
+            <h2>Resultado del examen</h2>
+
+            <p id="nombre-resultado"></p>
+
+            <p id="identificacion-resultado"></p>
+
+            <p id="nota-resultado"></p>
+
+            <p id="estado-resultado"></p>
+
+        </section>
+
+    </main>
+
+    <footer class="footer" id="pie-pagina">
+        <p>Acme School - Plataforma de gestión de exámenes</p>
+    </footer>
+
+</body>
+
+</html>
