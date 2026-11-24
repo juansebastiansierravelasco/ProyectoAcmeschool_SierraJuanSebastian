@@ -1,0 +1,200 @@
+
+:root {
+    --color-primario: #493078;
+    --color-secundario: #7655A6;
+    --color-fondo: #F4F1F9;
+    --color-blanco: #FFFFFF;
+    --color-texto: #333333;
+    --color-borde: #DDD5E8;
+}
+
+/* CONFIGURACIÓN GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+/* ENCABEZADO */
+.header {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    text-align: center;
+    padding: 25px;
+}
+
+.header h1 {
+    margin-bottom: 8px;
+}
+
+/* CONTENIDO PRINCIPAL */
+.main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+/* SECCIONES */
+.contenido {
+    background-color: var(--color-blanco);
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.contenido h2 {
+    color: var(--color-primario);
+    margin-bottom: 15px;
+}
+
+.contenido p {
+    margin-bottom: 15px;
+}
+
+/* VOLVER */
+.volver {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--color-primario);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.volver:hover {
+    text-decoration: underline;
+}
+
+/* FORMULARIO DEL ESTUDIANTE */
+.formulario-estudiante {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.formulario-estudiante label {
+    font-weight: bold;
+}
+
+.campo-estudiante {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.campo-estudiante:focus {
+    outline: 2px solid var(--color-secundario);
+    border-color: var(--color-secundario);
+}
+
+/* BOTONES */
+.boton-principal {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    border: none;
+    padding: 11px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+.boton-principal:hover {
+    background-color: var(--color-secundario);
+}
+
+/* INFORMACIÓN DEL EXAMEN */
+.informacion-examen {
+    margin-bottom: 25px;
+}
+
+.temporizador {
+    display: inline-block;
+    background-color: var(--color-fondo);
+    color: var(--color-primario);
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+#tiempo-restante {
+    font-size: 20px;
+}
+
+/* PREGUNTAS */
+.lista-preguntas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pregunta-resolver {
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    padding: 20px;
+    background-color: var(--color-fondo);
+}
+
+.pregunta-resolver h3 {
+    color: var(--color-primario);
+    margin-bottom: 15px;
+}
+
+.opcion-respuesta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.opcion-respuesta input {
+    width: auto;
+    accent-color: var(--color-primario);
+}
+
+/* RESULTADOS */
+#nota-resultado {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--color-primario);
+}
+
+#estado-resultado {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* PIE DE PÁGINA */
+.footer {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}
+@media (max-width: 600px) {
+
+    .main {
+        width: 95%;
+    }
+
+    .contenido {
+        padding: 15px;
+    }
+
+    .boton-principal {
+        width: 100%;
+    }
+
+}
