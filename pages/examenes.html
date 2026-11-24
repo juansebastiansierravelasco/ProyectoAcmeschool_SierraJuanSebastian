@@ -83,6 +83,74 @@
 
         </section>
 
+        <section class="preguntas-section">
+        <h2>Gestión de preguntas</h2>
+        <p>Administra las preguntas y respuestas de cada examen.</p>
+        <label for="examen-seleccionado">Seleccionar examen:</label>
+
+         <select id="examen-seleccionado">
+         <option value="">Selecciona un examen</option>
+         </select>
+
+         <button type="button" id="agregar-pregunta">
+         Agregar pregunta
+         </button>
+
+         <div id="formulario-pregunta">
+             <label for="enunciado-pregunta">
+             Enunciado de la pregunta:
+             </label>
+
+             <textarea
+             id="enunciado-pregunta"
+             required
+             placeholder="Escribe aquí la pregunta">
+             </textarea>
+
+             <button type="submit">
+              Guardar pregunta
+             </button>
+
+             <button type="button" id="cancelar-pregunta">
+               Cancelar
+             </button>
+
+            <form id="formulario-pregunta-form">
+
+             <label for="enunciado-pregunta">
+             Enunciado de la pregunta:
+            </label>
+
+            <textarea
+             id="enunciado-pregunta"
+             required
+             placeholder="Escribe aquí la pregunta">
+             </textarea>
+
+             <div id="opciones-respuesta">
+
+             <h3>Opciones de respuesta</h3>
+
+             <button type="button" id="agregar-respuesta">
+             Agregar respuesta
+             </button>
+
+             </div>
+
+             <button type="submit">
+             Guardar pregunta
+            </button>
+
+             <button type="button" id="cancelar-pregunta">
+             Cancelar
+            </button>
+
+            </form>
+
+         </div>
+
+        </section>
+
     </main>
 
     <footer class="footer">
