@@ -31,6 +31,8 @@ const botonCancelarPregunta = document.getElementById("cancelar-pregunta");
 const botonAgregarRespuesta = document.getElementById("agregar-respuesta");
 const listaRespuestas = document.getElementById("lista-respuestas");
 
+const listaPreguntas = document.getElementById("lista-preguntas");
+
 // Ocultar inicialmente el formulario de preguntas
 formularioPregunta.style.display = "none";
 
@@ -59,6 +61,59 @@ function mostrarExamenesEnSelector() {
 
     });
 }
+
+// --------------------------------------------------
+// 4.5. Mostrar las preguntas
+// --------------------------------------------------
+
+function mostrarPreguntas() {
+
+    listaPreguntas.replaceChildren();
+
+    const codigoSeleccionado = selectorExamen.value;
+
+    const examenSeleccionado = examenes.find((examen) => {
+        return examen.codigo === codigoSeleccionado;
+    });
+
+    if (!examenSeleccionado) {
+        return;
+    }
+
+    examenSeleccionado.preguntas.forEach((pregunta, indice) => {
+
+        const contenedor = document.createElement("div");
+
+        const titulo = document.createElement("h3");
+        titulo.textContent = `Pregunta ${indice + 1}: ${pregunta.enunciado}`;
+
+        contenedor.appendChild(titulo);
+
+        pregunta.respuestas.forEach((respuesta) => {
+
+            const opcion = document.createElement("p");
+
+            opcion.textContent = respuesta.descripcion;
+
+            if (respuesta.correcta) {
+                opcion.textContent += " (Respuesta correcta)";
+            }
+
+            contenedor.appendChild(opcion);
+
+        });
+
+        listaPreguntas.appendChild(contenedor);
+
+    });
+
+}
+
+selectorExamen.addEventListener("change", () => {
+
+    mostrarPreguntas();
+
+});
 
 // --------------------------------------------------
 // 5. Mostrar el formulario de preguntas
@@ -118,9 +173,20 @@ formularioPreguntaForm.addEventListener("submit", (evento) => {
     // Obtener el examen seleccionado
     const codigoSeleccionado = selectorExamen.value;
 
+    
+
     const examenSeleccionado = examenes.find((examen) => {
         return examen.codigo === codigoSeleccionado;
     });
+
+    const preguntaExiste = examenSeleccionado.preguntas.some((pregunta) => {
+    return pregunta.enunciado.toLowerCase() === enunciado.toLowerCase();
+     });
+
+     if (preguntaExiste) {
+    alert("Esta pregunta ya existe en este examen.");
+    return;
+    }
 
     if (!examenSeleccionado) {
         alert("No se encontró el examen seleccionado.");
