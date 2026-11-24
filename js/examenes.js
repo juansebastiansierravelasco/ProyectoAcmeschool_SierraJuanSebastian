@@ -84,6 +84,24 @@ function mostrarExamenes() {
         fila.appendChild(celdaDescripcion);
 
         const celdaAcciones = document.createElement("td");
+        const botonEliminar = document.createElement("button");
+        botonEliminar.textContent = "Eliminar";
+        celdaAcciones.appendChild(botonEliminar);
+        botonEliminar.addEventListener("click", () => {
+        const confirmar = confirm("¿Estás seguro de eliminar este examen?");
+
+        if (confirmar) {
+         const indice = examenes.findIndex((elemento) => {
+         return elemento.codigo === examen.codigo;
+         });
+         examenes.splice(indice, 1);
+         guardarExamenes(examenes);
+         listaExamenes.replaceChildren();
+         mostrarExamenes();
+
+        }
+
+        });
         fila.appendChild(celdaAcciones);
 
         listaExamenes.appendChild(fila);
