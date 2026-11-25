@@ -166,9 +166,49 @@ button:focus-visible {
     font-size: 13px;
     color: #E6DDF2;
 }
-/* DISEÑO RESPONSIVE */
-@media (max-width: 600px) {
+@media (min-width: 901px) {
     .main {
+        width: 90%;
+    }
+
+    #formulario-usuario {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Tablets */
+@media (min-width: 601px) and (max-width: 900px) {
+    .main {
+        width: 95%;
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+
+    .titulo {
+        font-size: 24px;
+    }
+
+    .tabla-container {
+        padding: 12px;
+    }
+
+    #formulario-registro {
+        padding: 20px;
+    }
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+    .header {
+        padding: 22px 15px;
+    }
+
+    .header h1 {
+        font-size: 26px;
+    }
+
+    .main {
+        width: 100%;
         margin: 25px auto;
         padding: 0 12px;
     }
@@ -186,7 +226,27 @@ button:focus-visible {
         width: 100%;
     }
 
+    .tabla-container {
+        padding: 10px;
+    }
+
+    .tabla-usuarios {
+        min-width: 750px;
+    }
+
     #formulario-registro {
         padding: 18px;
+    }
+
+    #formulario-usuario {
+        grid-template-columns: 1fr;
+    }
+
+    #formulario-usuario button {
+        width: 100%;
+    }
+
+    .footer {
+        padding: 20px 10px;
     }
 }

@@ -146,13 +146,93 @@ tbody tr:hover {
 }
 
 
+@media (min-width: 901px) {
+    .contenedor-resultados {
+        width: 90%;
+        margin: 40px auto;
+    }
+
+    .contenedor-tabla {
+        padding: 25px;
+    }
+}
+
+/* Tabletas */
+@media (min-width: 601px) and (max-width: 900px) {
+    .contenedor-resultados {
+        width: 95%;
+        margin: 30px auto;
+    }
+
+    .encabezado-seccion {
+        gap: 15px;
+    }
+
+    .contenedor-tabla {
+        padding: 20px;
+    }
+
+    th,
+    td {
+        padding: 12px;
+    }
+}
+
+/* Celulares */
 @media (max-width: 600px) {
+    .encabezado {
+        padding: 22px 15px;
+    }
+
+    .encabezado h1 {
+        font-size: 25px;
+    }
+
+    .contenedor-resultados {
+        width: 95%;
+        margin: 25px auto;
+    }
+
     .encabezado-seccion {
         flex-direction: column;
         align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .encabezado-seccion h2 {
+        font-size: 21px;
+    }
+
+    .boton-volver {
+        width: 100%;
+        text-align: center;
     }
 
     .contenedor-tabla {
         padding: 15px;
+    }
+
+    .titulo-tabla {
+        font-size: 18px;
+    }
+
+    table {
+        min-width: 750px;
+    }
+
+    th,
+    td {
+        padding: 11px;
+        font-size: 14px;
+    }
+
+    .mensaje-vacio {
+        padding: 20px 10px;
+        font-size: 14px;
+    }
+
+    .footer {
+        padding: 18px 10px;
     }
 }

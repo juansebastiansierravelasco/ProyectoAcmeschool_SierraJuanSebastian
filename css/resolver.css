@@ -183,18 +183,115 @@ body {
     padding: 20px;
     margin-top: 30px;
 }
+@media (min-width: 901px) {
+    .main {
+        width: 90%;
+    }
+
+    .contenido {
+        padding: 25px;
+    }
+
+    .pregunta-resolver {
+        padding: 20px;
+    }
+}
+
+/* Tabletas */
+@media (min-width: 601px) and (max-width: 900px) {
+    .main {
+        width: 95%;
+        margin: 25px auto;
+    }
+
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .contenido {
+        padding: 20px;
+    }
+
+    .pregunta-resolver {
+        padding: 18px;
+    }
+}
+
+/* Celulares */
 @media (max-width: 600px) {
+    .header {
+        padding: 22px 15px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
 
     .main {
         width: 95%;
+        margin: 20px auto;
     }
 
     .contenido {
         padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .contenido h2 {
+        font-size: 20px;
+    }
+
+    .volver {
+        margin-bottom: 15px;
+    }
+
+    .formulario-estudiante {
+        gap: 10px;
+    }
+
+    .campo-estudiante {
+        font-size: 16px;
     }
 
     .boton-principal {
         width: 100%;
+        padding: 13px;
     }
 
+    .temporizador {
+        padding: 10px;
+    }
+
+    #tiempo-restante {
+        font-size: 18px;
+    }
+
+    .lista-preguntas {
+        gap: 15px;
+    }
+
+    .pregunta-resolver {
+        padding: 15px;
+    }
+
+    .pregunta-resolver h3 {
+        font-size: 17px;
+    }
+
+    .opcion-respuesta {
+        align-items: flex-start;
+        padding: 5px 0;
+    }
+
+    #nota-resultado {
+        font-size: 20px;
+    }
+
+    #estado-resultado {
+        font-size: 18px;
+    }
+
+    .footer {
+        padding: 18px 10px;
+    }
 }

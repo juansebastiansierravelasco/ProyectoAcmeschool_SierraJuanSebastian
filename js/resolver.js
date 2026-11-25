@@ -1,6 +1,4 @@
-import { protegerPagina } from "./auth.js";
-import { obtenerExamenes } from "./storage.js";
-protegerPagina();
+import { obtenerExamenes, obtenerResultados, guardarResultados } from "./storage.js";
 // 1. Obtener los exámenes guardados
 let examenes = obtenerExamenes() || [];
 
@@ -11,6 +9,7 @@ let nombreEstudiante = "";
 let intervaloTiempo = null;
 let segundosRestantes = 0;
 let examenFinalizado = false;
+let resultados = obtenerResultados() || [];
 
 // 3. Obtener elementos del HTML
 const selectorExamen = document.getElementById("examen-disponible");
@@ -226,6 +225,21 @@ function finalizarExamen() {
     );
 
     const aprobado = calificacion >= Number(examenActual.porcentaje);
+    const nuevoResultado = {
+    id: Date.now(),
+    identificacion: identificacionEstudiante,
+    nombre: nombreEstudiante,
+    codigoExamen: examenActual.codigo,
+    tituloExamen: examenActual.titulo,
+    calificacion: calificacion,
+    respuestasCorrectas: respuestasCorrectas,
+    totalPreguntas: totalPreguntas,
+    estado: aprobado ? "Aprobado" : "No aprobado",
+    fecha: new Date().toLocaleString("es-CO")
+    };
+
+    resultados.push(nuevoResultado);
+    guardarResultados(resultados);
 
     nombreResultado.textContent = `Estudiante: ${nombreEstudiante}`;
 

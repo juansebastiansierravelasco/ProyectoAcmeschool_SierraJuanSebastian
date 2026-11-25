@@ -263,14 +263,61 @@ textarea {
     color: var(--color-blanco);
 }
 
-@media (max-width: 600px) {
+@media (min-width: 901px) {
     .main {
-        width: 95%;
+        width: 90%;
     }
 
     .contenido,
-    .formulario-section {
+    .formulario-section,
+    .preguntas-section {
+        padding: 25px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 601px) and (max-width: 900px) {
+    .main {
+        width: 95%;
+        margin: 25px auto;
+    }
+
+    .contenido,
+    .formulario-section,
+    .preguntas-section {
+        padding: 20px;
+    }
+
+    .header h1 {
+        font-size: 28px;
+    }
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+    .header {
+        padding: 22px 15px;
+    }
+
+    .header h1 {
+        font-size: 25px;
+    }
+
+    .main {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    .contenido,
+    .formulario-section,
+    .preguntas-section {
         padding: 15px;
+    }
+
+    .contenido h2,
+    .formulario-section h2,
+    .preguntas-section h2 {
+        font-size: 20px;
     }
 
     .botones-formulario {
@@ -279,5 +326,31 @@ textarea {
 
     .botones-formulario button {
         width: 100%;
+    }
+
+    .tabla-contenedor {
+        padding-bottom: 5px;
+    }
+
+    table {
+        min-width: 750px;
+    }
+
+    #lista-respuestas > div {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    #lista-respuestas input[type="text"] {
+        width: 100%;
+        flex-basis: 100%;
+    }
+
+    .preguntas-section button {
+        max-width: 100%;
+    }
+
+    .footer {
+        padding: 18px 10px;
     }
 }
