@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de resultados | Acme School</title>
+    <link rel="stylesheet" href="../css/resultados.css">
+    <script type="module" src="../js/resultados.js" defer></script>
+</head>
+<body>
+
+    <header class="encabezado">
+        <h1>Acme School</h1>
+        <p>Gestión de resultados</p>
+    </header>
+
+    <main class="contenedor-resultados">
+
+        <section class="encabezado-seccion">
+            <div>
+                <h2>Resultados de estudiantes</h2>
+                <p>Consulta las calificaciones de los exámenes presentados.</p>
+            </div>
+
+            <a href="dashboard.html" class="boton-volver">Volver al panel</a>
+        </section>
+
+        <section class="contenedor-tabla">
+            <div class="titulo-tabla">
+                <h3>Listado de resultados</h3>
+            </div>
+
+            <div class="tabla-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Identificación</th>
+                            <th>Estudiante</th>
+                            <th>Examen</th>
+                            <th>Calificación</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="lista-resultados">
+                    </tbody>
+                </table>
+            </div>
+
+            <p id="mensaje-vacio" class="mensaje-vacio">
+                No hay resultados registrados.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Acme School. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
