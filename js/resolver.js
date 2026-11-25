@@ -1,6 +1,6 @@
-
+import { protegerPagina } from "./auth.js";
 import { obtenerExamenes } from "./storage.js";
-
+protegerPagina();
 // 1. Obtener los exámenes guardados
 let examenes = obtenerExamenes() || [];
 

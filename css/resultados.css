@@ -121,7 +121,7 @@ tbody tr:hover {
 }
 
 .boton-eliminar {
-    background-color: #D9534F;
+    background-color: var(--color-primary);
     color: var(--color-white);
     border: none;
     padding: 8px 12px;
@@ -130,7 +130,7 @@ tbody tr:hover {
 }
 
 .boton-eliminar:hover {
-    background-color: #B52B27;
+    background-color:#A78BFA;
 }
 
 .footer {

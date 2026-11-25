@@ -1,3 +1,5 @@
+import { protegerPagina } from "./auth.js";
+protegerPagina();
 const usuarioActivo=JSON.parse(localStorage.getItem("usuarioActivo"));
 
 if (usuarioActivo===null) {

@@ -1,4 +1,4 @@
-import { guardarResultados,obtenerResultados } from "./storage";
+import { guardarResultados, obtenerResultados } from "./storage.js";
 import { protegerPagina } from "./auth.js";
 
 protegerPagina()
@@ -6,8 +6,15 @@ protegerPagina()
 let resultados= obtenerResultados() || [];
 
 const listaResultados=document.getElementById("lista-resultados");
+const mensajeVacio = document.getElementById("mensaje-vacio");
 
 function mostrarResultados() {
+    if (resultados.length === 0) {
+    mensajeVacio.style.display = "block";
+    return;
+    }
+
+    mensajeVacio.style.display = "none";
 
     resultados.forEach((resultado) => {
     
@@ -38,17 +45,30 @@ function mostrarResultados() {
     celdafecha.textContent = resultado.fecha;
     fila.appendChild(celdafecha);
 
-    const celdaacciones=document.createElement("td");
-    fila.appendChild(celdaacciones);
+    const celdaacciones = document.createElement("td");
 
-    const botonEliminar=document.createElement("button");
+    const botonEliminar = document.createElement("button");
     botonEliminar.textContent = "Eliminar";
+    botonEliminar.classList.add("boton-eliminar");
+
     celdaacciones.appendChild(botonEliminar);
     fila.appendChild(celdaacciones);
+    botonEliminar.addEventListener("click", () => {
+    const confirmar = confirm("¿Estás seguro de eliminar este resultado?");
+    if (!confirmar) {
+        return;
+    }
+    const resultadosActualizados = resultados.filter((elemento) => {
+     
+     return elemento.id !== resultado.id;
+    });
+    resultados = resultadosActualizados;
+    guardarResultados(resultados);
+    listaResultados.replaceChildren();
+    mostrarResultados();
+
+    });
     listaResultados.appendChild(fila);
-
-
-
-});
-    
+});  
 }
+mostrarResultados()
