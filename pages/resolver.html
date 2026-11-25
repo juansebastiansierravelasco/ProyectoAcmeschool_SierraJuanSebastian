@@ -38,11 +38,14 @@
                 </label>
 
                 <input
-                    type="text"
-                    id="identificacion-estudiante"
-                    class="campo-estudiante"
-                    required
-                    placeholder="Ingresa tu identificación"
+                  type="text"
+                  id="identificacion-estudiante"
+                  class="campo-estudiante"
+                  required
+                  placeholder="Ingresa tu identificación"
+                  inputmode="numeric"
+                  pattern="[0-9]+"
+                  title="La identificación debe contener únicamente números"
                 >
 
                 <label for="nombre-estudiante">
