@@ -15,3 +15,12 @@ export function obtenerExamenes() {
     const examenes = JSON.parse(localStorage.getItem("examenes"));
     return examenes;
 }
+
+export function guardarResultados(resultados){
+    localStorage.setItem("resultados",JSON.stringify(resultados));
+}
+
+export function obtenerResultados(){
+    const resultados = JSON.parse(localStorage.getItem("resultados"));
+    return resultados || [] ;
+}

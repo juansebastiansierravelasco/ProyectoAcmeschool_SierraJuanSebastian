@@ -1,0 +1,1 @@
+import { guardarResultados,obtenerResultados } from "./storage";

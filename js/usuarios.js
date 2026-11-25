@@ -8,8 +8,19 @@ protegerPagina();
 let usuarios = obtenerUsuarios();
 let identificacionOriginal = null;
 
-// 3. Obtener el cuerpo de la tabla
+// 3.el cuerpo de la tabla y variables de  identicacion y numero de telefono que sean enteros
 const listaUsuarios = document.getElementById("lista-usuarios");
+const campoIdentificacion = document.getElementById("identificacion");
+const campoTelefono = document.getElementById("telefono");
+// identificacion para que la identificacion y el telefono sean numeros
+campoIdentificacion.addEventListener("input", () => {
+    campoIdentificacion.value = campoIdentificacion.value.replace(/[^0-9]/g, "");
+});
+
+campoTelefono.addEventListener("input", () => {
+    campoTelefono.value = campoTelefono.value.replace(/[^0-9]/g, "");
+});
+
 
 // 4. Recorrer los usuarios y construir la tabla
 function mostrarUsuarios() {
@@ -119,6 +130,16 @@ formularioUsuario.addEventListener("submit", (evento) => {
     const telefono = document.getElementById("telefono").value;
     const cargo = document.getElementById("cargo").value;
     const contrasena = document.getElementById("contrasena").value;
+
+    if (!/^[0-9]+$/.test(identificacion)) {
+    alert("La identificación solamente debe contener números.");
+    return;
+    }
+
+    if (!/^[0-9]+$/.test(telefono)) {
+    alert("El teléfono solamente debe contener números.");
+    return;
+    }
 
     const nuevoUsuario = {
         identificacion: identificacion,
