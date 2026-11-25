@@ -1,20 +1,20 @@
 import { protegerPagina } from "./auth.js";
 import { obtenerExamenes, guardarExamenes } from "./storage.js";
-// 1. Proteger la página
 protegerPagina();
 
-// 2. Obtener los exámenes guardados
 let examenes = obtenerExamenes() || [];
 let codigoOriginal = null;
-
-// Asegurar que todos los exámenes tengan un arreglo de preguntas
+let indicePreguntaEditando = null;
 examenes.forEach((examen) => {
     if (!Array.isArray(examen.preguntas)) {
         examen.preguntas = [];
     }
 });
 
-// 3. Obtener elementos del HTML
+// --------------------------------------------------
+// 2. Obtener elementos del HTML
+// --------------------------------------------------
+
 const listaExamenes = document.getElementById("lista-examenes");
 const botonRegistrar = document.getElementById("registrar-examen");
 const formularioRegistro = document.getElementById("formulario-registro");
@@ -33,11 +33,10 @@ const listaRespuestas = document.getElementById("lista-respuestas");
 
 const listaPreguntas = document.getElementById("lista-preguntas");
 
-// Ocultar inicialmente el formulario de preguntas
 formularioPregunta.style.display = "none";
 
 // --------------------------------------------------
-// 4. Mostrar exámenes en el selector
+// 3. Mostrar exámenes en el selector
 // --------------------------------------------------
 
 function mostrarExamenesEnSelector() {
@@ -63,7 +62,7 @@ function mostrarExamenesEnSelector() {
 }
 
 // --------------------------------------------------
-// 4.5. Mostrar las preguntas
+// 4. Mostrar preguntas
 // --------------------------------------------------
 
 function mostrarPreguntas() {
@@ -103,6 +102,77 @@ function mostrarPreguntas() {
 
         });
 
+        // Botón editar pregunta
+        const botonEditarPregunta = document.createElement("button");
+        botonEditarPregunta.type = "button";
+        botonEditarPregunta.textContent = "Editar";
+
+        botonEditarPregunta.addEventListener("click", () => {
+
+            indicePreguntaEditando = indice;
+
+            campoEnunciado.value = pregunta.enunciado;
+
+            listaRespuestas.replaceChildren();
+
+            pregunta.respuestas.forEach((respuesta) => {
+                agregarRespuesta(
+                    respuesta.descripcion,
+                    respuesta.correcta
+                );
+            });
+
+            formularioPregunta.style.display = "block";
+
+        });
+
+        contenedor.appendChild(botonEditarPregunta);
+
+        // Botón eliminar pregunta
+        const botonEliminarPregunta = document.createElement("button");
+        botonEliminarPregunta.type = "button";
+        botonEliminarPregunta.textContent = "Eliminar";
+
+        botonEliminarPregunta.addEventListener("click", () => {
+
+            const confirmar = confirm(
+                "¿Estás seguro de eliminar esta pregunta?"
+            );
+
+            if (confirmar) {
+
+                examenSeleccionado.preguntas.splice(indice, 1);
+
+                // Si se elimina la pregunta que se estaba editando
+                if (indicePreguntaEditando === indice) {
+
+                    indicePreguntaEditando = null;
+
+                    formularioPreguntaForm.reset();
+                    listaRespuestas.replaceChildren();
+                    formularioPregunta.style.display = "none";
+
+                } else if (
+                    indicePreguntaEditando !== null &&
+                    indice < indicePreguntaEditando
+                ) {
+
+                    indicePreguntaEditando--;
+
+                }
+
+                guardarExamenes(examenes);
+
+                mostrarPreguntas();
+
+                alert("Pregunta eliminada correctamente.");
+
+            }
+
+        });
+
+        contenedor.appendChild(botonEliminarPregunta);
+
         listaPreguntas.appendChild(contenedor);
 
     });
@@ -110,13 +180,16 @@ function mostrarPreguntas() {
 }
 
 selectorExamen.addEventListener("change", () => {
-
+    indicePreguntaEditando = null;
+    formularioPreguntaForm.reset();
+    listaRespuestas.replaceChildren();
+    formularioPregunta.style.display = "none";
     mostrarPreguntas();
 
 });
 
 // --------------------------------------------------
-// 5. Mostrar el formulario de preguntas
+// 5. Mostrar formulario para agregar pregunta
 // --------------------------------------------------
 
 botonAgregarPregunta.addEventListener("click", () => {
@@ -125,16 +198,20 @@ botonAgregarPregunta.addEventListener("click", () => {
         alert("Primero debes seleccionar un examen.");
         return;
     }
+    indicePreguntaEditando = null;
+
+    formularioPreguntaForm.reset();
+    listaRespuestas.replaceChildren();
 
     formularioPregunta.style.display = "block";
 
 });
 
 // --------------------------------------------------
-// 6. Agregar respuestas
+// 6. Crear campos de respuestas
 // --------------------------------------------------
 
-function agregarRespuesta() {
+function agregarRespuesta(descripcion = "", esCorrecta = false) {
 
     const contenedor = document.createElement("div");
 
@@ -142,12 +219,12 @@ function agregarRespuesta() {
     respuesta.type = "text";
     respuesta.placeholder = "Escribe una respuesta";
     respuesta.required = true;
-
+    respuesta.value = descripcion;
     const correcta = document.createElement("input");
     correcta.type = "radio";
     correcta.name = "respuesta-correcta";
     correcta.required = true;
-
+    correcta.checked = esCorrecta;
     const etiqueta = document.createElement("label");
     etiqueta.textContent = "Respuesta correcta";
 
@@ -158,53 +235,56 @@ function agregarRespuesta() {
     listaRespuestas.appendChild(contenedor);
 }
 
-botonAgregarRespuesta.addEventListener("click", agregarRespuesta);
+botonAgregarRespuesta.addEventListener("click", () => {
+    agregarRespuesta();
+});
 
 // --------------------------------------------------
-// 7. Guardar preguntas y respuestas
+// 7. Guardar o actualizar preguntas
 // --------------------------------------------------
 
 formularioPreguntaForm.addEventListener("submit", (evento) => {
-
     evento.preventDefault();
-
     const enunciado = campoEnunciado.value.trim();
-
-    // Obtener el examen seleccionado
     const codigoSeleccionado = selectorExamen.value;
-
-    
-
     const examenSeleccionado = examenes.find((examen) => {
         return examen.codigo === codigoSeleccionado;
     });
-
-    const preguntaExiste = examenSeleccionado.preguntas.some((pregunta) => {
-    return pregunta.enunciado.toLowerCase() === enunciado.toLowerCase();
-     });
-
-     if (preguntaExiste) {
-    alert("Esta pregunta ya existe en este examen.");
-    return;
-    }
-
     if (!examenSeleccionado) {
         alert("No se encontró el examen seleccionado.");
         return;
     }
 
-    // Obtener los contenedores de respuestas
+    if (enunciado === "") {
+        alert("Debes escribir el enunciado de la pregunta.");
+        return;
+    }
+
+    // Comprobar preguntas duplicadas
+    const preguntaExiste = examenSeleccionado.preguntas.some(
+        (pregunta, indice) => {
+
+            return pregunta.enunciado.toLowerCase() === enunciado.toLowerCase()
+                && indice !== indicePreguntaEditando;
+
+        }
+    );
+
+    if (preguntaExiste) {
+        alert("Esta pregunta ya existe en este examen.");
+        return;
+    }
+
+    // Obtener campos de respuestas
     const contenedoresRespuestas = listaRespuestas.querySelectorAll(":scope > div");
 
     if (contenedoresRespuestas.length < 2) {
         alert("Debes agregar al menos dos respuestas.");
         return;
     }
+     const respuestas = [];
 
-    // Crear el arreglo de respuestas
-    const respuestas = [];
-
-    let hayRespuestaCorrecta = false;
+    let cantidadCorrectas = 0;
 
     contenedoresRespuestas.forEach((contenedor) => {
 
@@ -214,19 +294,17 @@ formularioPreguntaForm.addEventListener("submit", (evento) => {
         const descripcion = campoRespuesta.value.trim();
         const correcta = campoCorrecta.checked;
 
-        if (descripcion === "") {
-            return;
+        if (descripcion !== "") {
+
+            respuestas.push({
+                descripcion: descripcion,
+                correcta: correcta
+            });
+
+            if (correcta) {
+            cantidadCorrectas++;
+            }
         }
-
-        if (correcta) {
-            hayRespuestaCorrecta = true;
-        }
-
-        respuestas.push({
-            descripcion: descripcion,
-            correcta: correcta
-        });
-
     });
 
     if (respuestas.length !== contenedoresRespuestas.length) {
@@ -234,40 +312,45 @@ formularioPreguntaForm.addEventListener("submit", (evento) => {
         return;
     }
 
-    if (!hayRespuestaCorrecta) {
-        alert("Debes marcar una respuesta como correcta.");
+    if (cantidadCorrectas !== 1) {
+        alert("Debes marcar exactamente una respuesta como correcta.");
         return;
     }
 
-    // Crear la pregunta
-    const nuevaPregunta = {
+    const pregunta = {
         enunciado: enunciado,
         respuestas: respuestas
     };
 
-    // Agregar la pregunta al examen seleccionado
-    examenSeleccionado.preguntas.push(nuevaPregunta);
+    // Si estamos editando
+    if (indicePreguntaEditando !== null) {
 
-    // Guardar los cambios
+        examenSeleccionado.preguntas[indicePreguntaEditando] = pregunta;
+
+        alert("Pregunta actualizada correctamente.");
+
+    } else {
+
+        // Si estamos registrando
+        examenSeleccionado.preguntas.push(pregunta);
+
+        alert("Pregunta guardada correctamente.");
+    }
     guardarExamenes(examenes);
-
-    console.log("Pregunta guardada:", nuevaPregunta);
-    console.log("Examen actualizado:", examenSeleccionado);
-
-    alert("Pregunta guardada correctamente.");
-
-    // Limpiar y ocultar el formulario
+    // Limpiar formulario
+    indicePreguntaEditando = null;
     formularioPreguntaForm.reset();
     listaRespuestas.replaceChildren();
     formularioPregunta.style.display = "none";
-
+    mostrarPreguntas();
 });
 
 // --------------------------------------------------
-// 8. Cancelar el registro de una pregunta
+// 8. Cancelar registro o edición de pregunta
 // --------------------------------------------------
 
 botonCancelarPregunta.addEventListener("click", () => {
+    indicePreguntaEditando = null;
 
     formularioPreguntaForm.reset();
     listaRespuestas.replaceChildren();
@@ -325,9 +408,7 @@ formularioExamen.addEventListener("submit", (evento) => {
         alert("Ya existe un examen con ese código.");
         return;
     }
-
-    // Crear el objeto del examen
-    const nuevoExamen = {
+     const nuevoExamen = {
         codigo: codigo,
         titulo: titulo,
         tiempo: tiempo,
@@ -344,17 +425,13 @@ formularioExamen.addEventListener("submit", (evento) => {
         });
 
         if (indice !== -1) {
-
-            // Conservar las preguntas anteriores
-            nuevoExamen.preguntas = examenes[indice].preguntas || [];
+          nuevoExamen.preguntas = examenes[indice].preguntas || [];
 
             examenes[indice] = nuevoExamen;
-        }
+         }
 
     } else {
-
-        // Registrar examen nuevo
-        examenes.push(nuevoExamen);
+     examenes.push(nuevoExamen);
 
     }
 
@@ -406,8 +483,8 @@ function mostrarExamenes() {
 
         const celdaAcciones = document.createElement("td");
 
-        // Botón Editar
         const botonEditar = document.createElement("button");
+        botonEditar.type = "button";
         botonEditar.textContent = "Editar";
 
         botonEditar.addEventListener("click", () => {
@@ -426,13 +503,16 @@ function mostrarExamenes() {
 
         celdaAcciones.appendChild(botonEditar);
 
-        // Botón Eliminar
+        // Botón eliminar examen
         const botonEliminar = document.createElement("button");
+        botonEliminar.type = "button";
         botonEliminar.textContent = "Eliminar";
 
         botonEliminar.addEventListener("click", () => {
 
-            const confirmar = confirm("¿Estás seguro de eliminar este examen?");
+            const confirmar = confirm(
+                "¿Estás seguro de eliminar este examen?"
+            );
 
             if (confirmar) {
 
@@ -448,7 +528,7 @@ function mostrarExamenes() {
 
                     mostrarExamenes();
                     mostrarExamenesEnSelector();
-
+                    mostrarPreguntas();
                 }
             }
         });
@@ -465,6 +545,6 @@ function mostrarExamenes() {
 // --------------------------------------------------
 // 13. Cargar información al iniciar
 // --------------------------------------------------
-
 mostrarExamenes();
 mostrarExamenesEnSelector();
+
